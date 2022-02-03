@@ -1,0 +1,661 @@
+{
+	"info": {
+		"_postman_id": "6f6a1f6a-ee6c-42ea-9be6-5ecbb13d15b9",
+		"name": "time-tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Employee Rest",
+			"item": [
+				{
+					"name": "Create Andres Calamaro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.data.id).be.greaterThan(0);",
+									"    pm.collectionVariables.set(\"employee_id\", data.data.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_name\": \"acalamaro\",\n    \"display_name\": \"Andrés Calamaro\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/employee/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Employees",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.data.list).to.not.be.empty;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/employee/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Andres Calamaro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.data.id).to.be.greaterThan(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/employee/{{employee_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								"{{employee_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Andres Calamaro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.data.user_name).to.be.equal(\"acalamaro\"); // not changed",
+									"    pm.expect(data.data.display_name).to.be.equal(\"Andres Calamaro\"); // changed",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"id\": {{employee_id}},\n        \"user_name\": \"acalamaros\",\n        \"display_name\": \"Andres Calamaro\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/employee/{{employee_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								"{{employee_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Andres Calamaro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/employee/{{employee_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								"{{employee_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Employees Empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.data.list).to.be.empty;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/employee/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Time Data Rest",
+			"item": [
+				{
+					"name": "Create Elon Musk",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.data.id).be.greaterThan(0);",
+									"    pm.expect(data.data.time_data).to.not.be.empty;",
+									"    pm.collectionVariables.set(\"employee_id\", data.data.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_name\": \"emusk\",\n    \"display_name\": \"Elon Musk\",\n    \"time_data\": [{\n        \"name\": \"work\",\n        \"title\": \"Work\",\n        \"frames\": {\n            \"daily\": {\n                \"current\": 3,\n                \"previous\": 4\n            },\n            \"weekly\": {\n                \"current\": 24,\n                \"previous\": 34\n            },\n            \"monthly\": {\n                \"current\": 121,\n                \"previous\": 96\n            }\n        }\n    }, {\n        \"name\": \"play\",\n        \"title\": \"Play\",\n        \"frames\": {\n            \"daily\": {\n                \"current\": 3,\n                \"previous\": 4\n            },\n            \"weekly\": {\n                \"current\": 24,\n                \"previous\": 34\n            },\n            \"monthly\": {\n                \"current\": 121,\n                \"previous\": 96\n            }\n        }\n    }, {\n        \"name\": \"study\",\n        \"title\": \"Study\",\n        \"frames\": {\n            \"daily\": {\n                \"current\": 3,\n                \"previous\": 4\n            },\n            \"weekly\": {\n                \"current\": 24,\n                \"previous\": 34\n            },\n            \"monthly\": {\n                \"current\": 121,\n                \"previous\": 96\n            }\n        }\n    }, {\n        \"name\": \"exercise\",\n        \"title\": \"Exercise\",\n        \"frames\": {\n            \"daily\": {\n                \"current\": 3,\n                \"previous\": 4\n            },\n            \"weekly\": {\n                \"current\": 24,\n                \"previous\": 34\n            },\n            \"monthly\": {\n                \"current\": 121,\n                \"previous\": 96\n            }\n        }\n    }, {\n        \"name\": \"social\",\n        \"title\": \"Social\",\n        \"frames\": {\n            \"daily\": {\n                \"current\": 3,\n                \"previous\": 4\n            },\n            \"weekly\": {\n                \"current\": 24,\n                \"previous\": 34\n            },\n            \"monthly\": {\n                \"current\": 121,\n                \"previous\": 96\n            }\n        }\n    }, {\n        \"name\": \"self-care\",\n        \"title\": \"Self Care\",\n        \"frames\": {\n            \"daily\": {\n                \"current\": 3,\n                \"previous\": 4\n            },\n            \"weekly\": {\n                \"current\": 24,\n                \"previous\": 34\n            },\n            \"monthly\": {\n                \"current\": 121,\n                \"previous\": 96\n            }\n        }\n    }]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/employee/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Elon's Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.data.list.length).to.eq(3);",
+									"    pm.collectionVariables.set(\"time_data_id\", data.data.list[0].id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/employee/{{employee_id}}/timeData/?size=3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								"{{employee_id}}",
+								"timeData",
+								""
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Elon Musk",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.data.id).to.be.greaterThan(0);",
+									"    pm.expect(data.data.time_data).to.not.be.empty;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/employee/{{employee_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								"{{employee_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Elon Musk",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.data.user_name).to.be.equal(\"emusk\"); // not changed",
+									"    pm.expect(data.data.display_name).to.be.equal(\"Elonn Musk\"); // changed",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"id\": {{employee_id}},\n        \"user_name\": \"emusks\",\n        \"display_name\": \"Elonn Musk\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/employee/{{employee_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								"{{employee_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Time Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.data.id).to.be.gt(0);",
+									"    pm.collectionVariables.set(\"time_data_id\", data.data.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"other\",\n    \"title\": \"Other\",\n    \"frames\": {\n        \"daily\": {\n            \"current\": 3,\n            \"previous\": 4\n        },\n        \"weekly\": {\n            \"current\": 24,\n            \"previous\": 34\n        },\n        \"monthly\": {\n            \"current\": 121,\n            \"previous\": 96\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/employee/{{employee_id}}/timeData/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								"{{employee_id}}",
+								"timeData",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Time Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.data.id).to.gt(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/employee/{{employee_id}}/timeData/{{time_data_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								"{{employee_id}}",
+								"timeData",
+								"{{time_data_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Time Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.data.frames.daily.current).to.eq(5); // cahnged",
+									"    pm.expect(data.data.name).to.eq(\"other\"); // not changed",
+									"    pm.expect(data.data.title).to.eq(\"Other\"); // not changed",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": {{time_data_id}},\n    \"parent_id\": {{employee_id}},\n    \"name\": \"others\",\n    \"title\": \"Others\",\n    \"frames\": {\n        \"daily\": {\n            \"current\": 5,\n            \"previous\": 4\n        },\n        \"weekly\": {\n            \"current\": 24,\n            \"previous\": 34\n        },\n        \"monthly\": {\n            \"current\": 121,\n            \"previous\": 96\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/employee/{{employee_id}}/timeData/{{time_data_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								"{{employee_id}}",
+								"timeData",
+								"{{time_data_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Time Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/employee/{{employee_id}}/timeData/{{time_data_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								"{{employee_id}}",
+								"timeData",
+								"{{time_data_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Time Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.data.list).to.not.be.empty;",
+									"    pm.expect(data.data.page.total).to.eq(6);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"other\",\n    \"title\": \"Other\",\n    \"frames\": {\n        \"daily\": {\n            \"current\": 3,\n            \"previous\": 4\n        },\n        \"weekly\": {\n            \"current\": 24,\n            \"previous\": 34\n        },\n        \"monthly\": {\n            \"current\": 121,\n            \"previous\": 96\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/employee/{{employee_id}}/timeData/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								"{{employee_id}}",
+								"timeData",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:8081/api/v0",
+			"type": "string"
+		},
+		{
+			"key": "employee_id",
+			"value": ""
+		},
+		{
+			"key": "time_data_id",
+			"value": ""
+		}
+	]
+}
